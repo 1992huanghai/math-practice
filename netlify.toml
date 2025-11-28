@@ -1,0 +1,25 @@
+# Netlify 配置文件（可选）
+# 如果使用 Netlify 部署，这个文件可以优化部署设置
+
+[build]
+  # 发布目录（静态文件所在目录）
+  publish = "."
+  
+  # 构建命令（静态网站不需要构建）
+  command = ""
+
+[[headers]]
+  # 为所有文件添加安全头
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+  # 将所有请求重定向到 index.html（单页应用）
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

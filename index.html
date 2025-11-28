@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>小学生加减法练习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧮 加减法练习</h1>
+        </header>
+
+        <!-- 难度选择界面 -->
+        <div id="difficulty-screen" class="screen active">
+            <h2>选择难度</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" data-difficulty="20">
+                    <span class="difficulty-title">20以内</span>
+                    <span class="difficulty-desc">适合一年级</span>
+                </button>
+                <button class="difficulty-btn" data-difficulty="100">
+                    <span class="difficulty-title">100以内</span>
+                    <span class="difficulty-desc">适合二年级</span>
+                </button>
+                <button class="difficulty-btn" data-difficulty="1000">
+                    <span class="difficulty-title">1000以内</span>
+                    <span class="difficulty-desc">适合三年级</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 练习界面 -->
+        <div id="practice-screen" class="screen">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label">正确</span>
+                    <span id="correct-count" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">错误</span>
+                    <span id="wrong-count" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">总数</span>
+                    <span id="total-count" class="stat-value">0</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question">
+                    <span id="num1" class="number">0</span>
+                    <span id="operator" class="operator">+</span>
+                    <span id="num2" class="number">0</span>
+                    <span class="equals">=</span>
+                </div>
+            </div>
+
+            <div class="answer-container">
+                <input type="number" id="answer-input" placeholder="输入答案" autocomplete="off" inputmode="numeric">
+                <button id="submit-btn" class="submit-btn">提交答案</button>
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+
+            <div class="action-buttons">
+                <button id="new-question-btn" class="action-btn">下一题</button>
+                <button id="back-btn" class="action-btn secondary">返回</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
