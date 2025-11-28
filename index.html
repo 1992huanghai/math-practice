@@ -11,22 +11,27 @@
 <body>
     <div class="container">
         <header>
-            <h1>🧮 加减法练习（加油）</h1>
+            <div class="header-emoji">🌟</div>
+            <h1>🧮 加减法练习</h1>
+            <p class="header-subtitle">一起来挑战吧！</p>
         </header>
 
         <!-- 难度选择界面 -->
         <div id="difficulty-screen" class="screen active">
-            <h2>选择难度</h2>
+            <h2>✨ 选择难度 ✨</h2>
             <div class="difficulty-buttons">
-                <button class="difficulty-btn" data-difficulty="20">
+                <button class="difficulty-btn btn-level-1" data-difficulty="20">
+                    <span class="difficulty-emoji">🌱</span>
                     <span class="difficulty-title">20以内</span>
                     <span class="difficulty-desc">适合一年级</span>
                 </button>
-                <button class="difficulty-btn" data-difficulty="100">
+                <button class="difficulty-btn btn-level-2" data-difficulty="100">
+                    <span class="difficulty-emoji">🌿</span>
                     <span class="difficulty-title">100以内</span>
                     <span class="difficulty-desc">适合二年级</span>
                 </button>
-                <button class="difficulty-btn" data-difficulty="1000">
+                <button class="difficulty-btn btn-level-3" data-difficulty="1000">
+                    <span class="difficulty-emoji">🌳</span>
                     <span class="difficulty-title">1000以内</span>
                     <span class="difficulty-desc">适合三年级</span>
                 </button>
@@ -36,15 +41,18 @@
         <!-- 练习界面 -->
         <div id="practice-screen" class="screen">
             <div class="stats-bar">
-                <div class="stat-item">
+                <div class="stat-item stat-correct">
+                    <span class="stat-emoji">✅</span>
                     <span class="stat-label">正确</span>
                     <span id="correct-count" class="stat-value">0</span>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item stat-wrong">
+                    <span class="stat-emoji">❌</span>
                     <span class="stat-label">错误</span>
                     <span id="wrong-count" class="stat-value">0</span>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item stat-total">
+                    <span class="stat-emoji">📊</span>
                     <span class="stat-label">总数</span>
                     <span id="total-count" class="stat-value">0</span>
                 </div>
@@ -60,15 +68,23 @@
             </div>
 
             <div class="answer-container">
-                <input type="number" id="answer-input" placeholder="输入答案" autocomplete="off" inputmode="numeric">
-                <button id="submit-btn" class="submit-btn">提交答案</button>
+                <div class="input-wrapper">
+                    <input type="number" id="answer-input" placeholder="输入答案 ✏️" autocomplete="off" inputmode="numeric">
+                </div>
+                <button id="submit-btn" class="submit-btn">
+                    <span>✨ 提交答案</span>
+                </button>
             </div>
 
             <div id="feedback" class="feedback"></div>
 
             <div class="action-buttons">
-                <button id="new-question-btn" class="action-btn">下一题</button>
-                <button id="back-btn" class="action-btn secondary">返回</button>
+                <button id="new-question-btn" class="action-btn">
+                    <span>🎯 下一题</span>
+                </button>
+                <button id="back-btn" class="action-btn secondary">
+                    <span>🔙 返回</span>
+                </button>
             </div>
         </div>
     </div>

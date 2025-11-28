@@ -85,16 +85,18 @@ function showFeedback(isCorrect, correctAnswer) {
     setTimeout(() => {
         if (isCorrect) {
             elements.feedback.className = 'feedback correct';
-            elements.feedback.textContent = '✓ 答对了！';
+            const correctMessages = ['🎉 太棒了！答对了！', '✨ 真聪明！', '🌟 做得好！', '💯 完美！', '👏 厉害！'];
+            const randomMessage = correctMessages[Math.floor(Math.random() * correctMessages.length)];
+            elements.feedback.textContent = randomMessage;
             if (elements.questionContainer) {
                 elements.questionContainer.classList.add('bounce');
                 setTimeout(() => {
                     elements.questionContainer.classList.remove('bounce');
-                }, 500);
+                }, 600);
             }
         } else {
             elements.feedback.className = 'feedback wrong';
-            elements.feedback.textContent = `✗ 答错了！正确答案是 ${correctAnswer}`;
+            elements.feedback.textContent = `😊 再想想吧！正确答案是 ${correctAnswer}`;
             elements.answerInput.classList.add('shake');
             setTimeout(() => {
                 elements.answerInput.classList.remove('shake');
