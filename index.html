@@ -16,8 +16,25 @@
             <p class="header-subtitle">一起来挑战吧！</p>
         </header>
 
-        <!-- 难度选择界面 -->
-        <div id="difficulty-screen" class="screen active">
+        <!-- 模式选择界面 -->
+        <div id="mode-screen" class="screen active">
+            <h2>🎮 选择模式</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn practice-mode-btn" data-mode="practice">
+                    <span class="mode-emoji">📚</span>
+                    <span class="mode-title">练习模式</span>
+                    <span class="mode-desc">自由练习，不限时间</span>
+                </button>
+                <button class="mode-btn speed-mode-btn" data-mode="speed">
+                    <span class="mode-emoji">⚡</span>
+                    <span class="mode-title">竞速模式</span>
+                    <span class="mode-desc">20题挑战，比拼速度！</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 难度选择界面（练习模式） -->
+        <div id="difficulty-screen" class="screen">
             <h2>✨ 选择难度 ✨</h2>
             <div class="difficulty-buttons">
                 <button class="difficulty-btn btn-level-1" data-difficulty="20">
@@ -36,55 +53,182 @@
                     <span class="difficulty-desc">适合三年级</span>
                 </button>
             </div>
+            <button id="practice-back-to-mode" class="action-btn secondary" style="margin-top: 30px;">
+                <span>🔙 返回</span>
+            </button>
         </div>
 
         <!-- 练习界面 -->
         <div id="practice-screen" class="screen">
-            <div class="stats-bar">
-                <div class="stat-item stat-correct">
-                    <span class="stat-emoji">✅</span>
-                    <span class="stat-label">正确</span>
-                    <span id="correct-count" class="stat-value">0</span>
+            <div class="practice-layout">
+                <div class="practice-left">
+                    <div class="question-container">
+                        <div class="question">
+                            <span id="num1" class="number">0</span>
+                            <span id="operator" class="operator">+</span>
+                            <span id="num2" class="number">0</span>
+                            <span class="equals">=</span>
+                            <div class="inline-answer">
+                                <div class="input-wrapper">
+                                    <input type="number" id="answer-input" placeholder="输入答案 ✏️" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="submit-btn" class="submit-btn">
+                        <span>✨ 提交答案</span>
+                    </button>
+
+                    <!-- 答对时的操作按钮 -->
+                    <div id="correct-actions" class="action-buttons" style="display: none;">
+                        <button id="new-question-btn" class="action-btn">
+                            <span>🎯 下一题</span>
+                        </button>
+                        <button id="back-btn" class="action-btn secondary">
+                            <span>🔙 返回</span>
+                        </button>
+                    </div>
+
+                    <!-- 答错时的操作按钮 -->
+                    <div id="wrong-actions" class="action-buttons" style="display: none;">
+                        <button id="retry-btn" class="action-btn retry-btn">
+                            <span>🔄 重试</span>
+                        </button>
+                        <button id="show-answer-btn" class="action-btn show-answer-btn">
+                            <span>👀 查看答案</span>
+                        </button>
+                        <button id="back-btn-wrong" class="action-btn secondary">
+                            <span>🔙 返回</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="stat-item stat-wrong">
-                    <span class="stat-emoji">❌</span>
-                    <span class="stat-label">错误</span>
-                    <span id="wrong-count" class="stat-value">0</span>
+
+                <div class="practice-right">
+                    <div class="stats-bar">
+                        <div class="stat-item stat-correct">
+                            <span class="stat-emoji">✅</span>
+                            <span class="stat-label">正确</span>
+                            <span id="correct-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item stat-wrong">
+                            <span class="stat-emoji">❌</span>
+                            <span class="stat-label">错误</span>
+                            <span id="wrong-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item stat-total">
+                            <span class="stat-emoji">📊</span>
+                            <span class="stat-label">总数</span>
+                            <span id="total-count" class="stat-value">0</span>
+                        </div>
+                    </div>
+
+                    <div id="feedback" class="feedback"></div>
                 </div>
-                <div class="stat-item stat-total">
-                    <span class="stat-emoji">📊</span>
-                    <span class="stat-label">总数</span>
-                    <span id="total-count" class="stat-value">0</span>
+            </div>
+        </div>
+
+        <!-- 竞速模式难度选择界面 -->
+        <div id="speed-difficulty-screen" class="screen">
+            <h2>⚡ 竞速模式 - 选择难度</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn btn-level-1 speed-difficulty-btn" data-difficulty="20">
+                    <span class="difficulty-emoji">🌱</span>
+                    <span class="difficulty-title">20以内</span>
+                    <span class="difficulty-desc">适合一年级</span>
+                </button>
+                <button class="difficulty-btn btn-level-2 speed-difficulty-btn" data-difficulty="100">
+                    <span class="difficulty-emoji">🌿</span>
+                    <span class="difficulty-title">100以内</span>
+                    <span class="difficulty-desc">适合二年级</span>
+                </button>
+                <button class="difficulty-btn btn-level-3 speed-difficulty-btn" data-difficulty="1000">
+                    <span class="difficulty-emoji">🌳</span>
+                    <span class="difficulty-title">1000以内</span>
+                    <span class="difficulty-desc">适合三年级</span>
+                </button>
+            </div>
+            <button id="speed-back-to-mode" class="action-btn secondary" style="margin-top: 30px;">
+                <span>🔙 返回</span>
+            </button>
+        </div>
+
+        <!-- 竞速模式练习界面 -->
+        <div id="speed-practice-screen" class="screen">
+            <div class="speed-stats-bar">
+                <div class="speed-stat-item">
+                    <span class="speed-stat-label">⏱️ 用时</span>
+                    <span id="speed-timer" class="speed-stat-value">00:00</span>
+                </div>
+                <div class="speed-stat-item">
+                    <span class="speed-stat-label">📝 进度</span>
+                    <span id="speed-progress-value" class="speed-stat-value">0/20</span>
+                </div>
+                <div class="speed-stat-item">
+                    <span class="speed-stat-label">✅ 正确</span>
+                    <span id="speed-correct" class="speed-stat-value">0</span>
                 </div>
             </div>
 
-            <div class="question-container">
-                <div class="question">
-                    <span id="num1" class="number">0</span>
-                    <span id="operator" class="operator">+</span>
-                    <span id="num2" class="number">0</span>
-                    <span class="equals">=</span>
-                </div>
+            <div class="speed-info-bar">
+                <span id="speed-difficulty-badge" class="difficulty-badge">20以内</span>
+                <span class="speed-hint" id="speed-hint">完成 20 道题后点击下方提交按钮</span>
             </div>
 
-            <div class="answer-container">
-                <div class="input-wrapper">
-                    <input type="number" id="answer-input" placeholder="输入答案 ✏️" autocomplete="off" inputmode="numeric">
+            <div class="speed-progress-wrapper">
+                <div class="speed-progress-track">
+                    <div id="speed-progress-fill" class="speed-progress-fill"></div>
                 </div>
-                <button id="submit-btn" class="submit-btn">
-                    <span>✨ 提交答案</span>
-                </button>
+                <span id="speed-progress-text" class="speed-progress-text">0/20</span>
             </div>
 
-            <div id="feedback" class="feedback"></div>
+            <div class="speed-questions-grid" id="speed-questions-grid">
+                <!-- 题目卡片在此渲染 -->
+            </div>
 
-            <div class="action-buttons">
-                <button id="new-question-btn" class="action-btn">
-                    <span>🎯 下一题</span>
+            <div class="speed-submit-wrapper">
+                <button id="speed-submit-btn" class="submit-btn large">
+                    <span>✨ 提交所有答案</span>
                 </button>
-                <button id="back-btn" class="action-btn secondary">
-                    <span>🔙 返回</span>
-                </button>
+                <p class="speed-submit-hint">完成后点击提交，系统会自动判分并记录用时</p>
+            </div>
+        </div>
+
+        <!-- 竞速模式结果界面 -->
+        <div id="speed-result-screen" class="screen">
+            <div class="result-container">
+                <div class="result-emoji" id="result-emoji">🏆</div>
+                <h2 id="result-title">挑战完成！</h2>
+                <div class="result-stats">
+                    <div class="result-stat-item">
+                        <span class="result-stat-label">⏱️ 总用时</span>
+                        <span id="result-time" class="result-stat-value">00:00</span>
+                    </div>
+                    <div class="result-stat-item">
+                        <span class="result-stat-label">✅ 正确题数</span>
+                        <span id="result-correct" class="result-stat-value">0</span>
+                    </div>
+                    <div class="result-stat-item">
+                        <span class="result-stat-label">📊 准确率</span>
+                        <span id="result-accuracy" class="result-stat-value">0%</span>
+                    </div>
+                </div>
+                <div id="record-message" class="record-message"></div>
+                <div class="result-buttons">
+                    <button id="speed-view-answers-btn" class="action-btn">
+                        <span>👀 查看答案</span>
+                    </button>
+                    <button id="speed-retry-btn" class="action-btn">
+                        <span>🔄 再来一次</span>
+                    </button>
+                    <button id="speed-back-to-mode-result" class="action-btn secondary">
+                        <span>🔙 返回</span>
+                    </button>
+                </div>
+                <div id="speed-review-section" class="speed-review-section">
+                    <h3>答题详情</h3>
+                    <div id="speed-review-grid" class="speed-questions-grid"></div>
+                </div>
             </div>
         </div>
     </div>

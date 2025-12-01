@@ -304,6 +304,26 @@ header h1 {
     50% { opacity: 1; transform: scale(1.2); }
 }
 
+.practice-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.practice-left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.practice-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
 .question {
     display: flex;
     justify-content: center;
@@ -365,6 +385,14 @@ header h1 {
     margin-bottom: 30px;
 }
 
+.inline-answer {
+    min-width: 240px;
+}
+
+.inline-answer .input-wrapper {
+    width: 240px;
+}
+
 .input-wrapper {
     position: relative;
 }
@@ -382,7 +410,7 @@ header h1 {
 
 #answer-input {
     width: 100%;
-    padding: 30px 30px 30px 70px;
+    padding: 25px 25px 25px 70px;
     font-size: 52px;
     text-align: center;
     border: 4px solid #ffeef0;
@@ -401,6 +429,13 @@ header h1 {
                 0 15px 40px rgba(255, 154, 158, 0.25),
                 inset 0 2px 5px rgba(255, 255, 255, 0.8);
     transform: scale(1.02);
+}
+
+#answer-input:disabled {
+    background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 #answer-input::placeholder {
@@ -573,6 +608,28 @@ header h1 {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
+.action-btn.retry-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 15px 40px rgba(79, 172, 254, 0.4);
+}
+
+.action-btn.retry-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(79, 172, 254, 0.5);
+}
+
+.action-btn.show-answer-btn {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+    box-shadow: 0 15px 40px rgba(250, 112, 154, 0.4);
+}
+
+.action-btn.show-answer-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(250, 112, 154, 0.5);
+}
+
 .action-btn:active {
     transform: translateY(-1px) scale(0.98);
 }
@@ -580,6 +637,21 @@ header h1 {
 .action-btn span {
     position: relative;
     z-index: 1;
+}
+
+/* 答错时的操作按钮组布局 */
+#wrong-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#wrong-actions .action-btn {
+    width: 100%;
+}
+
+#wrong-actions .action-btn.secondary {
+    margin-top: 10px;
 }
 
 /* iPad 横屏优化 */
@@ -635,8 +707,455 @@ header h1 {
     animation: shake 0.5s ease;
 }
 
+/* 模式选择界面 */
+.mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.mode-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border: 3px solid rgba(255, 154, 158, 0.3);
+    border-radius: 30px;
+    padding: 40px 30px;
+    font-size: 32px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 154, 158, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.mode-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.mode-btn:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 154, 158, 0.6);
+}
+
+.practice-mode-btn {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.speed-mode-btn {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.mode-emoji {
+    font-size: 50px;
+    display: block;
+    animation: bounce-emoji 2s ease-in-out infinite;
+}
+
+.mode-title {
+    font-size: 42px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.mode-desc {
+    font-size: 22px;
+    opacity: 0.8;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+/* 竞速模式统计栏 */
+.speed-stats-bar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffeef0 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(255, 154, 158, 0.15);
+    border: 2px solid rgba(255, 154, 158, 0.2);
+}
+
+.speed-info-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 15px;
+}
+
+.difficulty-badge {
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(255, 154, 158, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.difficulty-badge[data-level="20"] {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+
+.difficulty-badge[data-level="100"] {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+}
+
+.difficulty-badge[data-level="1000"] {
+    background: linear-gradient(135deg, #9d50bb 0%, #6e48aa 100%);
+}
+
+.difficulty-badge:hover {
+    transform: translateY(-2px);
+}
+
+.speed-hint {
+    font-size: 18px;
+    color: #888;
+    flex: 1;
+}
+
+.speed-progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.speed-progress-track {
+    flex: 1;
+    height: 14px;
+    background: rgba(255, 154, 158, 0.2);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.speed-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff9a9e 100%);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+}
+
+.speed-progress-text {
+    min-width: 70px;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff6b9d;
+}
+
+/* 竞速模式题目网格 */
+.speed-questions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.speed-question-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 18px;
+    padding: 16px 18px;
+    border: 2px solid rgba(255, 154, 158, 0.2);
+    box-shadow: 0 6px 20px rgba(255, 154, 158, 0.15);
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.speed-question-card.correct {
+    border-color: #27ae60;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    box-shadow: 0 10px 25px rgba(39, 174, 96, 0.2);
+}
+
+.speed-question-card.wrong {
+    border-color: #e74c3c;
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.2);
+}
+
+.speed-question-card.wrong .speed-question-text {
+    color: #c0392b;
+}
+
+.speed-question-card.wrong .speed-question-input input {
+    border-color: #e74c3c;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.speed-question-card.correct .speed-question-input input {
+    border-color: #27ae60;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.speed-question-card .correct-answer {
+    font-size: 18px;
+    color: #c0392b;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.correct-check {
+    color: #27ae60;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.speed-question-card.blank {
+    border-style: dashed;
+    opacity: 0.85;
+}
+
+.speed-question-card.filled {
+    border-color: rgba(255, 154, 158, 0.6);
+    box-shadow: 0 10px 25px rgba(255, 154, 158, 0.25);
+}
+
+.speed-question-text {
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    flex: 1;
+    white-space: nowrap;
+}
+
+.speed-question-input {
+    min-width: 95px;
+    flex-shrink: 0;
+}
+
+.speed-question-input input {
+    width: 95px;
+    padding: 12px;
+    font-size: 24px;
+    border: 3px solid rgba(255, 154, 158, 0.4);
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.speed-question-input input:focus {
+    border-color: #ff6b9d;
+    box-shadow: 0 0 0 4px rgba(255, 154, 158, 0.2);
+}
+
+.speed-question-input input:disabled {
+    background: rgba(255, 255, 255, 0.7);
+    color: #666;
+    cursor: not-allowed;
+}
+
+.speed-question-card.correct input {
+    border-color: #27ae60;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.speed-question-card.wrong input {
+    border-color: #e74c3c;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.speed-question-result {
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 110px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.speed-question-card.correct .speed-question-result {
+    color: #27ae60;
+}
+
+.speed-question-card.wrong .speed-question-result {
+    color: #e74c3c;
+}
+
+.speed-submit-wrapper {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.speed-submit-wrapper .submit-btn.large {
+    padding: 25px 60px;
+    font-size: 34px;
+}
+
+.speed-submit-hint {
+    margin-top: 12px;
+    color: #888;
+    font-size: 18px;
+}
+
+.speed-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.speed-stat-label {
+    font-size: 18px;
+    color: #666;
+    font-weight: 600;
+}
+
+.speed-stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#speed-timer {
+    color: #ff6b9d;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+/* 竞速模式结果界面 */
+.result-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.result-emoji {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.result-container h2 {
+    font-size: 42px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    font-weight: 800;
+}
+
+.result-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.result-stat-item {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffeef0 100%);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(255, 154, 158, 0.15);
+    border: 2px solid rgba(255, 154, 158, 0.2);
+}
+
+.result-stat-label {
+    font-size: 22px;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.result-stat-value {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.record-message {
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.record-message.record-broken {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #27ae60;
+    border: 3px solid #27ae60;
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
+    animation: correct-pop 0.6s ease-out;
+}
+
+.record-message.record-normal {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffeef0 100%);
+    color: #666;
+    border: 2px solid rgba(255, 154, 158, 0.3);
+}
+
+.result-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.speed-review-section {
+    margin-top: 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 24px;
+    padding: 25px;
+    border: 2px solid rgba(255, 154, 158, 0.2);
+    box-shadow: 0 10px 25px rgba(255, 154, 158, 0.15);
+    display: none;
+}
+
+.speed-review-section h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ff6b9d;
+}
+
+.result-buttons .action-btn {
+    width: 100%;
+}
+
 /* 响应式优化 */
 @media (max-width: 600px) {
+    .practice-layout {
+        flex-direction: column;
+    }
+    
     header h1 {
         font-size: 42px;
     }
@@ -646,6 +1165,7 @@ header h1 {
     }
     
     #answer-input {
+        width: 100%;
         font-size: 42px;
         padding: 25px 25px 25px 60px;
     }
