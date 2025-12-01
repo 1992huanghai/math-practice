@@ -64,7 +64,9 @@ const elements = {
     recordMessage: document.getElementById('record-message'),
     speedViewAnswersBtn: document.getElementById('speed-view-answers-btn'),
     speedReviewSection: document.getElementById('speed-review-section'),
-    speedReviewGrid: document.getElementById('speed-review-grid')
+    speedReviewGrid: document.getElementById('speed-review-grid'),
+    audioCorrect: document.getElementById('audio-correct'),
+    audioWrong: document.getElementById('audio-wrong')
 };
 
 // 生成随机数
@@ -139,6 +141,7 @@ function showFeedback(isCorrect, correctAnswer) {
             const correctMessages = ['🎉 太棒了！答对了！', '✨ 真聪明！', '🌟 做得好！', '💯 完美！', '👏 厉害！'];
             const randomMessage = correctMessages[Math.floor(Math.random() * correctMessages.length)];
             elements.feedback.textContent = randomMessage;
+            playFeedbackAudio(true);
             if (elements.questionContainer) {
                 elements.questionContainer.classList.add('bounce');
                 setTimeout(() => {
@@ -151,6 +154,7 @@ function showFeedback(isCorrect, correctAnswer) {
         } else {
             elements.feedback.className = 'feedback wrong';
             elements.feedback.textContent = `😊 再想想吧！`;
+            playFeedbackAudio(false);
             elements.answerInput.classList.add('shake');
             setTimeout(() => {
                 elements.answerInput.classList.remove('shake');
@@ -427,6 +431,13 @@ function updateSpeedDifficultyUI(difficulty) {
     if (elements.speedHint) {
         elements.speedHint.textContent = `完成 ${label} 的 20 道题后点击下方提交按钮`;
     }
+}
+
+function playFeedbackAudio(isCorrect) {
+    const audio = isCorrect ? elements.audioCorrect : elements.audioWrong;
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
 }
 
 function renderSpeedReviewGrid() {
